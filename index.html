@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,6 +81,7 @@
             border-radius: 3px;
             font-size: 0.8rem;
             font-weight: 600;
+            text-transform: none;
         }
 
         .lang-btn:hover, .lang-btn:focus {
@@ -556,12 +556,12 @@
             <span class="sync-badge" id="sync-status">✓ Local Mode (Offline-First)</span>
         </div>
         <div class="lang-selector">
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('ar')">AR</button>
-            <button class="lang-btn" onclick="setLang('fr')">FR</button>
-            <button class="lang-btn" onclick="setLang('es')">ES</button>
-            <button class="lang-btn" onclick="setLang('zh')">ZH</button>
-            <button class="lang-btn" onclick="setLang('ru')">RU</button>
+            <button class="lang-btn" onclick="setLang('en')">English</button>
+            <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+            <button class="lang-btn" onclick="setLang('fr')">Français</button>
+            <button class="lang-btn" onclick="setLang('es')">Español</button>
+            <button class="lang-btn" onclick="setLang('zh')">中文</button>
+            <button class="lang-btn" onclick="setLang('ru')">Русский</button>
         </div>
     </header>
 
@@ -1090,7 +1090,7 @@
                 syncBtn: "Sincronizar", queueMsg: " informes en cola", sandboxMode: "Modo Sandbox Offline",
                 dashHead: "Estadísticas de campo", dashTotal: "TOTAL DE INFORMES", dashCrit: "CASOS CRÍTICOS",
                 dashAudit: "Informes enviados", noSub: "No se han rastreado envíos locales.",
-                thRef: "Ref Sitio", thType: "Tipo", thDmg: "Daño", thTime: "Hora capturada",
+                thRef: "Ref Sitio", thType: "Tipo", thDmg: "Damage", thTime: "Hora capturada",
                 popTitle: "Nombre del sitio", popRef: "Ref", popDmg: "Daño", popNeeds: "Necesidades", popNone: "Ninguna listada",
                 mapTab: "Vista de Mapa", dashTab: "Estadísticas Dashboard",
                 locPlace: "Seleccione cuadrícula o escriba referencia...", detailsPlace: "ej: Escuela Primaria de Tacloban",
@@ -1122,7 +1122,7 @@
                 latrineText: "是否有安全的卫生厕所？",
                 latrineOpts: ["有 - 充足", "有 - 不足", "无厕所"],
                 surveyModule: "调查模块",
-                lblDynamicHeading: "Active Field Survey",
+                lblDynamicHeading: "活动现场调查",
                 resnetResult: "AI estimate: {dmg} damage — check below",
                 legMin: "轻微破坏", legPart: "部分破坏", legComp: "完全破坏", pushBtn: "推送到后台",
                 t1: { h: "轻微 / 无损坏", d: "仅表面受损" },
@@ -1149,7 +1149,7 @@
                 registryErr: "未找到该位置，请尝试其他关键词。",
                 gpsPermissionErr: "此文件想要获取您的当前地理位置权限。",
                 aiAnalyzing: "正在检查照片...",
-                aiOffline: "照片已保存。无网络连接进行AI analysis — 请手动选择损坏级别。",
+                aiOffline: "照片已保存。无网络连接 — 请手动选择损坏级别。",
                 aiSuccess: "AI评估：",
                 aiSuccessEnd: "级损坏已检测到。如需要可在下方调整。",
                 aiNoResult: "照片已上传。无法自动分类 — 请在下方选择损坏级别。",
@@ -1167,7 +1167,7 @@
                 elecOpts: ["Повреждений не обнаружено", "Незначительные повреждения", "Умеренные повреждения", "Серьезные повреждения", "Полностью разрушено"],
                 elecLbl: "Состояние электроснабжения:", healthLbl: "Функционирование медицинских служб:",
                 needsHead: "Самые насущные потребности:", secureTxt: "Your data stays on this device until you sync.",
-                storageHead: "Локальная очередь:", csvBtn: "Экспорт CSV", geojsonBtn: "Export GeoJSON",
+                storageHead: "Локальная очередь:", csvBtn: "Export CSV", geojsonBtn: "Export GeoJSON",
                 photoField: "Загрузить фото объекта:", dashPower: "ОТКАЗ ЭНЕРГОСЕТИ",
                 displacedText: "Оценочное число перемещенных лиц на объекте",
                 latrineText: "Доступны ли безопасные туалеты?",
@@ -1209,7 +1209,8 @@
                 registryErr: "Местоположение не найдено. Попробуйте другой запрос.",
                 gpsPermissionErr: "Этот файл запрашивает доступ к вашему текущему местоположению.",
                 privacyConsentLbl: "Я даю согласие на сбор и передачу этих неперсональных метаданных инфраструктуры в соответствии с Политикой ПРООН в области защиты персональных данных и конфиденциальности.",
-                sandboxMode: "Песочница оффлайн"
+                sandboxMode: "Песочница оффлайн",
+                needSub: "Инфраструктура и потребности"
             }
         };
 

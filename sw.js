@@ -1,44 +1,53 @@
-var CACHE_NAME = 'undp-field-v1';
-var STATIC_ASSETS = [
-    './',
-    './index.html',
-    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
-    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
+const CACHE_NAME = 'crisismap-v2';
+const ASSETS_TO_CACHE = [
+    '/',
+    '/index.html',
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'
 ];
 
-self.addEventListener('install', function(e) {
-    e.waitUntil(
+self.addEventListener('install', function(event) {
+    event.waitUntil(
         caches.open(CACHE_NAME).then(function(cache) {
-            return cache.addAll(STATIC_ASSETS);
+            return cache.addAll(ASSETS_TO_CACHE);
         })
     );
+    self.skipWaiting();
 });
 
-self.addEventListener('fetch', function(e) {
-    var url = e.request.url;
+self.addEventListener('activate', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.filter(function(name) {
+                    return name !== CACHE_NAME;
+                }).map(function(name) {
+                    return caches.delete(name);
+                })
+            );
+        })
+    );
+    self.clients.claim();
+});
 
-    // Cache map tiles from OpenStreetMap
-    if (url.includes('tile.openstreetmap.org')) {
-        e.respondWith(
-            caches.open('undp-map-tiles').then(function(cache) {
-                return cache.match(e.request).then(function(cached) {
-                    if (cached) return cached;
-                    return fetch(e.request).then(function(response) {
-                        cache.put(e.request, response.clone());
-                        return response;
-                    }).catch(function() {
-                        return cached;
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request).then(function(cachedResponse) {
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+            return fetch(event.request).then(function(networkResponse) {
+                if (event.request.url.includes('tile.openstreetmap.org')) {
+                    caches.open(CACHE_NAME).then(function(cache) {
+                        cache.put(event.request, networkResponse.clone());
                     });
-                });
-            })
-        );
-        return;
-    }
-
-    // For everything else, try network first, fall back to cache
-    e.respondWith(
-        fetch(e.request).catch(function() {
-            return caches.match(e.request);
+                }
+                return networkResponse;
+            }).catch(function() {
+                if (event.request.mode === 'navigate') {
+                    return caches.match('/index.html');
+                }
+            });
         })
     );
 });

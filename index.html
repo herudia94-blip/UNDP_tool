@@ -1033,7 +1033,7 @@
                 mHead: "Confirmer l'Enregistrement", mBody: "Sauvegarder ce rapport sur votre appareil?", mOk: "Valider", mNo: "Annuler",
                 duplicateTag: "⚠️ Attention: Un rapport pour cette empreinte ou ces coordonnées existe déjà dans la file d'attente.",
                 syncBtn: "Synchroniser", queueMsg: " rapports en attente", sandboxMode: "Mode Sandbox Hors-ligne",
-                dashHead: "Statistiques de Terrain", dashTotal: "TOTAL DES RAPPORTS", dashCrit: "CAS CRITIQUES",
+                dashHead: "Statistiques de Terrain", dashTotal: "Total des rapports", dashCrit: "Cas critiques",
                 dashAudit: "Rapports soumis", noSub: "Aucune soumission locale suivie pour le moment.",
                 thRef: "Réf du Site", thType: "Type", thDmg: "Dommage", thTime: "Heure de Capture",
                 popTitle: "Nom du Site", popRef: "Ref", popDmg: "Dommage", popNeeds: "Besoins", popNone: "Aucun répertorié",
@@ -1078,9 +1078,9 @@
                 mHead: "Confirmar guardar", mBody: "¿Guardar este informe en su dispositivo?", mOk: "Confirmar", mNo: "Cancelar",
                 duplicateTag: "⚠️ Atención: Ya existe un informe para esta huella o coordenadas en la cola local.",
                 syncBtn: "Sincronizar", queueMsg: " informes en cola", sandboxMode: "Modo Sandbox Offline",
-                dashHead: "Estadísticas de campo", dashTotal: "TOTAL DE INFORMES", dashCrit: "CASOS CRÍTICOS",
+                dashHead: "Estadísticas de campo", dashTotal: "Total de informes", dashCrit: "Casos críticos",
                 dashAudit: "Informes enviados", noSub: "No se han rastreado envíos locales.",
-                thRef: "Ref Sitio", thType: "Type", thDmg: "Daño", thTime: "Hora capturada",
+                thRef: "Ref Sitio", thType: "Tipo", thDmg: "Damage", thTime: "Hora capturada",
                 popTitle: "Nombre del sitio", popRef: "Ref", popDmg: "Daño", popNeeds: "Necesidades", popNone: "Ninguna listada",
                 mapTab: "Vista de Mapa", dashTab: "Estadísticas Dashboard",
                 locPlace: "Seleccione cuadrícula o escriba referencia...", detailsPlace: "ej: Escuela Primaria de Tacloban",
@@ -1152,7 +1152,7 @@
                 elecOpts: ["Повреждений не обнаружено", "Незначительные повреждения", "Умеренные повреждения", "Серьезные повреждения", "Полностью разрушено"],
                 elecLbl: "Состояние электроснабжения:", healthLbl: "Функционирование медицинских служб:",
                 needsHead: "Самые насущные потребности:", secureTxt: "Ваши данные хранятся на устройстве до момента синхронизации.",
-                storageHead: "Локальная очередь:", csvBtn: "Export CSV", geojsonBtn: "Export GeoJSON",
+                storageHead: "Локальная очередь:", csvBtn: "Экспорт CSV", geojsonBtn: "Экспорт GeoJSON",
                 photoField: "Загрузить фото объекта:", dashPower: "ОТКАЗ ЭНЕРГОСЕТИ",
                 displacedText: "Оценочное число перемещенных лиц на объекте",
                 latrineText: "Доступны ли безопасные туалеты?",
@@ -1174,7 +1174,7 @@
                 aiNoResult: "Результат не получен",
                 t1: { h: "Минимальный / Без повреждений", d: "только косметические" },
                 t2: { h: "Частично повреждено", d: "структурно пригодно" },
-                t3: { h: "Полносью разрушено", d: "разрушено / небезопасно" },
+                t3: { h: "Полностью разрушено", d: "разрушено / небезопасно" },
                 debOpts: ["Нет", "Да"],
                 infraOpts: ["Жилой сектор", "Коммерческий сектор", "Правительственное здание", "Коммунальная инфраструктура", "Транспорт/Связь", "Община (Школы/Клиники)", "Общественные пространства", "Другое"],
                 crisisOpts: ["Природные: Землетрясение", "Природные: Наводнение", "Природные: Цунами", "Природные: Ураган", "Природные: Лесной пожар", "Техногенная катастрофа", "Антропогенный конфликт"],
@@ -1184,7 +1184,7 @@
                 mHead: "Подтвердить сохранение", mBody: "Сохранить этот отчёт на устройстве?", mOk: "Сохранить", mNo: "Отмена",
                 duplicateTag: "⚠️ Внимание: Отчет для этого объекта или координат уже существует в локальной очереди.",
                 syncBtn: "Синхронизировать", queueMsg: " записей в локальной очереди", sandboxMode: "Песочница оффлайн",
-                dashHead: "Полевая статистика", dashTotal: "ВСЕГО ОТЧЕТОВ", dashCrit: "КРИТИЧЕСКИЕ СЛУЧАИ",
+                dashHead: "Полевая статистика", dashTotal: "Всего отчётов", dashCrit: "Критические случаи",
                 dashAudit: "Поданные отчёты", noSub: "Локальных отчетов пока не отслежено.",
                 thRef: "Идент. объекта", thType: "Тип", thDmg: "Разрушение", thTime: "Время записи",
                 popTitle: "Название объекта", popRef: "Идент.", popDmg: "Разрушение", popNeeds: "Потребности", popNone: "Нет в списке",
@@ -1391,6 +1391,17 @@
             const existing = document.getElementById("battery-warning-banner");
             if (existing) return;
 
+            const batteryMessages = {
+                en: { msg: "Battery is at", pct: "%", ai: "AI photo analysis is disabled to save power.", manual: "Please select damage level manually." },
+                ar: { msg: "مستوى البطارية", pct: "%", ai: "تم تعطيل تحليل الصور بالذكاء الاصطناعي لتوفير الطاقة.", manual: "يرجى تحديد مستوى الضرر يدويًا." },
+                fr: { msg: "Batterie à", pct: "%", ai: "L'analyse photo IA est désactivée pour économiser l'énergie.", manual: "Veuillez sélectionner le niveau de dommage manuellement." },
+                es: { msg: "Batería al", pct: "%", ai: "El análisis de fotos con IA está desactivado para ahorrar energía.", manual: "Por favor seleccione el nivel de daño manualmente." },
+                zh: { msg: "电量为", pct: "%", ai: "AI照片分析已关闭以节省电量。", manual: "请手动选择损坏级别。" },
+                ru: { msg: "Заряд батареи", pct: "%", ai: "ИИ-анализ фото отключён для экономии заряда.", manual: "Пожалуйста, выберите уровень повреждения вручную." }
+            };
+
+            const t = batteryMessages[activeLang] || batteryMessages['en'];
+
             const banner = document.createElement("div");
             banner.id = "battery-warning-banner";
             banner.style.cssText = `
@@ -1409,9 +1420,9 @@
             banner.innerHTML = `
                 <span style="font-size:1.2rem;">🔋</span>
                 <span>
-                    Battery is at <strong>${Math.round(level)}%</strong>. 
-                    AI photo analysis is disabled to save power. 
-                    Please <strong>select damage level manually</strong>.
+                    ${t.msg} <strong>${Math.round(level)}${t.pct}</strong>. 
+                    ${t.ai} 
+                    <strong>${t.manual}</strong>
                 </span>
                 <button onclick="document.getElementById('battery-warning-banner').remove()"
                     style="margin-left:auto; background:none; border:none; 
